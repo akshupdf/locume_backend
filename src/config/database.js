@@ -6,10 +6,13 @@ dotenv.config();
 
 const pool = new Pool({
   user: 'postgres',
-  host: 'localhost',
+  host: 'locumedb.csma0nyjaqdr.ap-south-1.rds.amazonaws.com',
   database: 'postgres',
-  password:'Shivam@991133',
+  password: 'ABDyzpLJE4yAa3QS28YU',
   port: 5432,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 export const connectToDatabase = async () => {
@@ -18,7 +21,7 @@ export const connectToDatabase = async () => {
     console.log('Connected to PostgreSQL database');
     await createTables()
   } catch (error) {
-    console.error('Failed to connect to the database', error);
+    console.error('Failed to connect to the database', error.message);
     throw error;
   }
 };
