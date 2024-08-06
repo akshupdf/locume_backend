@@ -94,7 +94,7 @@ const getAllDoctors = asyncMiddleware(async (req, res, next) => {
 const getSingleUserById = asyncMiddleware(async (req, res, next) => {
     const { id } = req.params
     const data = await userService.getSingleUserByUserId(id)
-    return res.status(200).json({ status: 200, message: "Found", result: data })
+    return res.status(200).json({ status: 200, message: "Found", result: data.rows })
 })
 
 export default {

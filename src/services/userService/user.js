@@ -26,7 +26,7 @@ const getUserDataById = async (id) => {
 	    id = '${id}'
         `
         const data = await query(userQuery)
-        return data.rows[0]
+        return data
 
     } catch (error) {
         console.log(error)
@@ -36,10 +36,27 @@ const getUserDataById = async (id) => {
 const getAllDoctors = async () => {
     try {
         const getAllQuery = `
-        select * from users
+select
+	u.id ,
+	u.first_name,
+	ov.mobile_number,
+	u.last_name ,
+	u.gender ,
+	u.avilability ,
+	u.medical_id ,
+	u."location" ,
+	u.specialization ,
+	u.hourly_rate ,
+	u.otp_verification_id ,
+	u.created_at ,
+	u.updated_at
+from
+	users u
+left join otp_verification ov on
+	ov.id = u.otp_verification_id
         `
         const data = await query(getAllQuery)
-        return data.rows[0]
+        return data.rows
 
     } catch (error) {
         console.log(error)
@@ -78,14 +95,28 @@ const sendOtpForRegisterService = async (mobile_number, otp) => {
 const getSingleUserByUserId = async(id)=>{
     try {
         const getUserQuery = `
-        select 
-            u.first_name, ov.mobile_number 
-        from users u
-            left join otp_verficiation on ov
-            u.otp_verificaion_id = ov.id
-            where u.id = '${id}
+select
+	u.first_name,
+	ov.mobile_number,
+	u.id ,
+	u.last_name ,
+	u.gender ,
+	u.avilability ,
+	u.medical_id ,
+	u."location" ,
+	u.specialization ,
+	u.hourly_rate ,
+	u.otp_verification_id ,
+	u.created_at ,
+	u.updated_at 
+from
+	users u
+left join otp_verification ov on
+        u.otp_verification_id = ov.id
+where
+	u.id = '${id}'
         `
-        await query(getUserQuery)
+       return await query(getUserQuery)
         
     } catch (error) {
         console.log(error)

@@ -7,6 +7,6 @@ router.post('/userLogin',userController.login)
 router.post('/generateOtp',userController.generateOTPFun)
 router.post('/verifyOtp',userController.verifyOtp)
 router.get('/getAllDoctors',userController.getAllDoctors)
-router.get('/getSingleUserById:id',userController.getSingleUserById)
+router.get('/getSingleUserById/:id',userController.getSingleUserById)
 
 export default router
