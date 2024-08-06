@@ -66,7 +66,28 @@ left join otp_verification ov on
 const getUserDataByOtpVerificationId = async(otpVerficationId) =>{
     try {
         const userGetQuery = `
-        select * from users u where u.otp_verification_id = '${otpVerficationId}'
+SELECT
+	u.id,
+	u.first_name,
+	u.last_name,
+	u.gender,
+	u.avilability,
+	u.medical_id,
+	ov.mobile_number,
+	u."location",
+	u.specialization,
+	u.hourly_rate,
+	u.otp_verification_id,
+	u.created_at,
+	u.updated_at
+FROM
+	users u
+LEFT JOIN otp_verification ov ON
+	ov.id = '${otpVerficationId}'
+WHERE
+	u.otp_verification_id = '${otpVerficationId}'
+ORDER BY
+	u.last_name ASC;
         `
         const data = await query(userGetQuery)
         return data.rows[0]
