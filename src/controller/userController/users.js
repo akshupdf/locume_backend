@@ -39,6 +39,12 @@ const login = asyncMiddleware(async (req, res, next) => {
     return res.status(200).json({ status: 200, message: "Login Succesfully", user: user, token: token })
 })
 
+const editProfile = asyncMiddleware(async(req,res,next)=>{
+    const {firstName, lastName, gender, availability, medicalId, location, specialization, hourlyRate, totalExp, ownClinic, clinicTimeSlot, clinicLocation, idealNumber, preferredSpecialities, visitHospital, visitHospitalSlot, hospitalLocation, userId} = req.body
+    await userService.userEditProfileService(firstName, lastName, gender, availability, medicalId, location, specialization, hourlyRate, totalExp, ownClinic, clinicTimeSlot, clinicLocation, idealNumber, preferredSpecialities, visitHospital, visitHospitalSlot, hospitalLocation, userId)
+    return res.status(200).json({ status: 200, message: "Sucess"})
+})
+
 
 const generateOTPFun = asyncMiddleware(async (req, res, next) => {
     const { mobileNumber, otpType } = req.body
@@ -100,6 +106,7 @@ const getSingleUserById = asyncMiddleware(async (req, res, next) => {
 export default {
     userRegister,
     login,
+    editProfile,
     generateOTPFun,
     getAllDoctors,
     verifyOtp,

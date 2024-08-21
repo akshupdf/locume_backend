@@ -4,6 +4,7 @@ const router = Router()
 
 router.post('/addUsers', userController.userRegister)
 router.post('/userLogin',userController.login)
+router.put('/editProfile',userController.editProfile)
 router.post('/generateOtp',userController.generateOTPFun)
 router.post('/verifyOtp',userController.verifyOtp)
 router.get('/getAllDoctors',userController.getAllDoctors)
