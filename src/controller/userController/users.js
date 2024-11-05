@@ -40,8 +40,8 @@ const login = asyncMiddleware(async (req, res, next) => {
 })
 
 const editProfile = asyncMiddleware(async(req,res,next)=>{
-    const {firstName, lastName, gender, availability, medicalId, location, specialization, hourlyRate, totalExp, ownClinic, clinicTimeSlot, clinicLocation, idealNumber, preferredSpecialities, visitHospital, visitHospitalSlot, hospitalLocation, userId} = req.body
-    await userService.userEditProfileService(firstName, lastName, gender, availability, medicalId, location, specialization, hourlyRate, totalExp, ownClinic, clinicTimeSlot, clinicLocation, idealNumber, preferredSpecialities, visitHospital, visitHospitalSlot, hospitalLocation, userId)
+    const {firstName, lastName, gender, availability, medicalId, location, specialization, hourlyRate, totalExp, ownClinic, clinicTimeSlot, clinicLocation, idealNumber, preferredSpecialities, visitHospital, visitHospitalSlot, hospitalLocation} = req.body
+    await userService.userEditProfileService(firstName, lastName, gender, availability, medicalId, location, specialization, hourlyRate, totalExp, ownClinic, clinicTimeSlot, clinicLocation, idealNumber, preferredSpecialities, visitHospital, visitHospitalSlot, hospitalLocation, req.userId)
     return res.status(200).json({ status: 200, message: "Sucess"})
 })
 

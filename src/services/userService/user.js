@@ -63,7 +63,7 @@ left join otp_verification ov on
     }
 }
 
-const getUserDataByOtpVerificationId = async(otpVerficationId) =>{
+const getUserDataByOtpVerificationId = async (otpVerficationId) => {
     try {
         const userGetQuery = `
 SELECT
@@ -91,9 +91,9 @@ ORDER BY
         `
         const data = await query(userGetQuery)
         return data.rows[0]
-        
+
     } catch (error) {
-        
+        console.log(error)
     }
 }
 
@@ -113,7 +113,7 @@ const sendOtpForRegisterService = async (mobile_number, otp) => {
 }
 
 
-const getSingleUserByUserId = async(id)=>{
+const getSingleUserByUserId = async (id) => {
     try {
         const getUserQuery = `
 select
@@ -137,14 +137,13 @@ left join otp_verification ov on
 where
 	u.id = '${id}'
         `
-       return await query(getUserQuery)
-        
+        return await query(getUserQuery)
     } catch (error) {
         console.log(error)
     }
 }
 
-const userEditProfileService = async (firstName, lastName, gender, availability, medicalId, location,specialization, hourlyRate, totalExp, ownClinic, clinicTimeSlot,clinicLocation, idealNumber, preferredSpecialities, visitHospital,visitHospitalSlot, hospitalLocation, userId) => {
+const userEditProfileService = async (firstName, lastName, gender, availability, medicalId, location, specialization, hourlyRate, totalExp, ownClinic, clinicTimeSlot, clinicLocation, idealNumber, preferredSpecialities, visitHospital, visitHospitalSlot, hospitalLocation, userId) => {
     try {
         const aval = availability && availability.length > 0 ? `'${availability.join("','")}'` : null;
         const clinicTimeSlotArray = clinicTimeSlot && clinicTimeSlot.length > 0 ? `'${clinicTimeSlot.join("','")}'` : null;
@@ -178,7 +177,6 @@ const userEditProfileService = async (firstName, lastName, gender, availability,
 
     } catch (error) {
         console.error(error);
-        throw new Error('Failed to update user profile.');
     }
 };
 
